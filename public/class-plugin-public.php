@@ -27,7 +27,7 @@ class WP_Portofolio_Public {
 	 * Register all scripts
 	 */
 	public function pf_enqueue_scripts() {
-		wp_enqueue_script( 'pf-admin', plugins_url( '/assets/css/bootstrap.min.js', __FILE__ ), 'jquery', time(), true );
+		wp_enqueue_script( 'pf-admin', plugins_url( '/assets/js/bootstrap.min.js', __FILE__ ), 'jquery', time(), true );
 	}
 
 
