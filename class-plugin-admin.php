@@ -1,6 +1,6 @@
 <?php
 
-class WP_Portfolio_Admin {
+class WP_Portofolio_Admin {
 
 	/**
 	 * Wp_Pool_Admin constructor.
@@ -15,8 +15,37 @@ class WP_Portfolio_Admin {
 		add_action( 'add_meta_boxes', [ $this, 'pf_add_meta_box' ] );
 		add_action( 'save_post', [ $this, 'pf_save_metadata' ] );
 
+		add_action( 'init', array( $this, 'pf_register_shortcodes' ) );
+
 
 	}
+
+
+	/**
+	 * Register all shortcode
+	 */
+	public function pf_register_shortcodes() {
+		add_shortcode( 'show_projects', array( $this, 'pf_render_shortcode_show_projects' ) );
+	}
+
+	/**
+	 * Render all shortcode
+	 */
+	public function pf_render_shortcode_show_projects() {
+		require_once plugin_dir_path( __FILE__ ) . '/templates/projects-template.php';
+	}
+
+
+	/**
+	 * Set a template which is display tour adding form for vendor
+	 */
+	public function add_tour_template( $page_template ) {
+		$page_template = plugins_url( 'templates/projects-templates.php', __FILE__ );
+
+		return $page_template;
+
+	}//end method add_tour_template
+
 
 	/**
 	 * Register Projects Custom Post Types
@@ -43,7 +72,7 @@ class WP_Portfolio_Admin {
 			'public'    => true,
 			'labels'    => $labels,
 			'menu_icon' => 'dashicons-layout',
-			'supports'  => array( 'title', 'editor', 'thumbnail' ),
+			'supports'  => array( 'title', 'editor', 'thumbnail', 'page-attributes' ),
 			'rewrite'   => array( 'slug' => 'projects' ),
 
 		);
@@ -132,7 +161,7 @@ class WP_Portfolio_Admin {
 			return $post_id;
 		}
 
-		$nonce = $_POST['pf_meta_box_nonce'];
+		$nonce = isset( $_POST['pf_meta_box_nonce'] ) ? $_POST['pf_meta_box_nonce'] : "";
 
 		// Verify that the nonce is valid.
 		if ( ! wp_verify_nonce( $nonce, 'pf_meta_box_nonce' ) ) {
@@ -177,5 +206,5 @@ class WP_Portfolio_Admin {
 
 } //end main class
 
-new WP_Portfolio_Admin();
+new WP_Portofolio_Admin();
 
