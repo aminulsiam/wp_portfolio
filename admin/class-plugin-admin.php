@@ -17,6 +17,10 @@ class WP_Portofolio_Admin {
 
 		add_action( 'init', array( $this, 'pf_register_shortcodes' ) );
 
+		define( 'CSMS_PLUGIN_URL', WP_PLUGIN_URL . '/' . plugin_basename( dirname( __FILE__ ) ) . '/' );
+		define( 'CSMS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+		define( 'CSMS_PLUGIN_FILE', plugin_basename( __FILE__ ) );
+
 
 	}
 
@@ -32,19 +36,12 @@ class WP_Portofolio_Admin {
 	 * Render all shortcode
 	 */
 	public function pf_render_shortcode_show_projects() {
-		require_once plugin_dir_path( __FILE__ ) . '/templates/projects-template.php';
+
+		$plugin_dir_path = plugin_dir_path( __FILE__ );
+
+		require_once $plugin_dir_path . '../templates/projects-template.php';
+		//require_once plugin_dir_path( __FILE__ ) . 'templates/projects-template.php';
 	}
-
-
-	/**
-	 * Set a template which is display tour adding form for vendor
-	 */
-	public function add_tour_template( $page_template ) {
-		$page_template = plugins_url( 'templates/projects-templates.php', __FILE__ );
-
-		return $page_template;
-
-	}//end method add_tour_template
 
 
 	/**
@@ -72,7 +69,7 @@ class WP_Portofolio_Admin {
 			'public'    => true,
 			'labels'    => $labels,
 			'menu_icon' => 'dashicons-layout',
-			'supports'  => array( 'title', 'editor', 'thumbnail', 'page-attributes' ),
+			'supports'  => array( 'title', 'editor', 'thumbnail' ),
 			'rewrite'   => array( 'slug' => 'projects' ),
 
 		);
@@ -184,16 +181,14 @@ class WP_Portofolio_Admin {
 	/**
 	 * Register all styles
 	 */
-	public
-	function pf_enqueue_styles() {
+	public function pf_enqueue_styles() {
 		wp_enqueue_style( 'pf-admin-css', plugins_url( '/assets/css/wppool-admin.css', __FILE__ ), array(), time(), 'all' );
 	}
 
 	/**
 	 * Register all scripts
 	 */
-	public
-	function pf_enqueue_scripts() {
+	public function pf_enqueue_scripts() {
 
 		$page = isset( $_REQUEST['page'] ) ? sanitize_text_field( $_REQUEST['page'] ) : '';
 
