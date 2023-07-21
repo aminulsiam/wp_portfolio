@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class WP_Portofolio_Admin
+ */
 class WP_Portofolio_Admin {
 
 	/**
@@ -10,17 +13,11 @@ class WP_Portofolio_Admin {
 		add_action( 'admin_enqueue_scripts', array( $this, 'pf_enqueue_styles' ), 10 );
 		add_action( 'admin_enqueue_scripts', [ $this, 'pf_enqueue_scripts' ] );
 
-
 		add_action( 'init', [ $this, 'pf_register_projects_cpt' ] );
 		add_action( 'add_meta_boxes', [ $this, 'pf_add_meta_box' ] );
 		add_action( 'save_post', [ $this, 'pf_save_metadata' ] );
 
 		add_action( 'init', array( $this, 'pf_register_shortcodes' ) );
-
-		define( 'CSMS_PLUGIN_URL', WP_PLUGIN_URL . '/' . plugin_basename( dirname( __FILE__ ) ) . '/' );
-		define( 'CSMS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-		define( 'CSMS_PLUGIN_FILE', plugin_basename( __FILE__ ) );
-
 
 	}
 
@@ -36,11 +33,8 @@ class WP_Portofolio_Admin {
 	 * Render all shortcode
 	 */
 	public function pf_render_shortcode_show_projects() {
-
 		$plugin_dir_path = plugin_dir_path( __FILE__ );
-
 		require_once $plugin_dir_path . '../templates/projects-template.php';
-		//require_once plugin_dir_path( __FILE__ ) . 'templates/projects-template.php';
 	}
 
 
@@ -132,12 +126,8 @@ class WP_Portofolio_Admin {
                         image.src = URL.createObjectURL(event.target.files[0]);
                     };
                 </script>
-
-
 				<?php wp_nonce_field( 'pf_meta_box_nonce', 'pf_meta_box_nonce' ); ?>
-
             </div>
-
         </form>
 		<?php
 	} //end function pf_render_metabox
@@ -189,12 +179,8 @@ class WP_Portofolio_Admin {
 	 * Register all scripts
 	 */
 	public function pf_enqueue_scripts() {
-
-		$page = isset( $_REQUEST['page'] ) ? sanitize_text_field( $_REQUEST['page'] ) : '';
-
+		$page           = isset( $_REQUEST['page'] ) ? sanitize_text_field( $_REQUEST['page'] ) : '';
 		$current_screen = get_current_screen();
-
-
 		wp_enqueue_script( 'pf-admin', plugins_url( '/assets/js/pf-admin.js', __FILE__ ), 'jquery', time(), true );
 	}
 

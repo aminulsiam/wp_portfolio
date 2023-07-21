@@ -9,10 +9,6 @@ class WP_Portofolio_Public {
 	public function __construct() {
 		add_action( 'wp_enqueue_scripts', [ $this, 'pf_enqueue_styles' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'pf_enqueue_scripts' ] );
-
-		define( 'PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
-
-
 	}
 
 
