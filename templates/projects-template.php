@@ -20,7 +20,7 @@ if ( isset( $_GET['category'] ) ) {
 
 	$category = $_GET['category'];
 
-	$args         = array(
+	$args     = array(
 		'post_type' => 'projects',
 		'tax_query' => array(
 			array(
@@ -46,7 +46,6 @@ if ( isset( $_GET['category'] ) ) {
 					$pf_description = get_post_meta( get_the_ID(), 'pf_description', true );
 
 					$terms = get_the_terms( get_the_ID(), 'project_category' );
-
 
 					?>
                     <div class="col-lg-4 col-md-12 mb-4">
@@ -96,9 +95,10 @@ if ( isset( $_GET['category'] ) ) {
                                     <p style="margin-top:20px">
 										<?php echo $pf_description; ?>
                                     </p>
-									<?php the_post_thumbnail(); ?>
+									<?php the_post_thumbnail( array( 800, 200 ) ); ?>
                                 </div>
 
+                                
                                 <!-- Modal Footer -->
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
@@ -111,7 +111,6 @@ if ( isset( $_GET['category'] ) ) {
 					<?php
 				}
 			}
-
 			wp_reset_postdata();
 			?>
         </div>
@@ -141,7 +140,6 @@ if ( isset( $_GET['category'] ) ) {
 						$pf_description = get_post_meta( get_the_ID(), 'pf_description', true );
 
 						$terms = get_the_terms( get_the_ID(), 'project_category' );
-
 
 						?>
                         <div class="col-lg-4 col-md-12 mb-4">
@@ -191,7 +189,7 @@ if ( isset( $_GET['category'] ) ) {
                                         <p style="margin-top:20px">
 											<?php echo $pf_description; ?>
                                         </p>
-										<?php the_post_thumbnail(); ?>
+										<?php the_post_thumbnail( array( 200, 100 ) ); ?>
                                     </div>
 
                                     <!-- Modal Footer -->
@@ -207,7 +205,6 @@ if ( isset( $_GET['category'] ) ) {
 					}
 				}
 				wp_reset_postdata();
-
 				?>
             </div>
         </section>
