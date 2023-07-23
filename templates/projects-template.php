@@ -7,7 +7,7 @@
 
 		foreach ( $get_all_terms as $terms => $term ) {
 			?>
-            <a href="?category=<?php echo $term->name; ?>"
+            <a href="?category=<?php esc_html_e( $term->name ); ?>"
                class="list-group-item"><?php echo $term->name; ?></a>
 			<?php
 		}
@@ -40,10 +40,10 @@ if ( isset( $_GET['category'] ) ) {
 				while ( $projects->have_posts() ) {
 					$projects->the_post();
 
-					// Get post meta values
-					$pf_ex_url      = get_post_meta( get_the_ID(), 'pf_ex_url', true );
-					$pf_title       = get_post_meta( get_the_ID(), 'pf_title', true );
-					$pf_description = get_post_meta( get_the_ID(), 'pf_description', true );
+					$pf_ex_url          = get_post_meta( get_the_ID(), 'pf_ex_url', true );
+					$pf_title           = get_post_meta( get_the_ID(), 'pf_title', true );
+					$pf_description     = get_post_meta( get_the_ID(), 'pf_description', true );
+					$pf_multiple_images = get_post_meta( get_the_ID(), 'pf_multiple_images', true );
 
 					$terms = get_the_terms( get_the_ID(), 'project_category' );
 
@@ -60,7 +60,7 @@ if ( isset( $_GET['category'] ) ) {
                                 <hr>
 								<?php
 								foreach ( $terms as $term ) {
-									echo '<span style="font-weight:bold">Category : ' . $term->name . '</span></br>';
+									echo '<span style="font-weight:bold"> ' . __( 'Category :', 'pf' ) . $term->name . '</span></br>';
 								}
 								?>
                                 <p class="card-text" style="margin-top:20px">
@@ -95,13 +95,24 @@ if ( isset( $_GET['category'] ) ) {
                                     <p style="margin-top:20px">
 										<?php echo $pf_description; ?>
                                     </p>
-									<?php the_post_thumbnail( array( 800, 200 ) ); ?>
+
+									<?php
+									if ( $pf_multiple_images ) {
+										echo '<hr> <h4 style="text-align:center"> ' . __( 'The Preview Images', 'pf' ) . ' </h4>';
+										$image_ids = explode( ',', $pf_multiple_images );
+										foreach ( $image_ids as $image_id ) {
+											echo wp_get_attachment_image( $image_id, 'thumbnail' );
+										}
+									}
+									echo '<hr> <h4 style="text-align:center">' . __( 'The Post Thumbnail', 'pf' ) . '</h4>';
+									the_post_thumbnail();
+									?>
                                 </div>
 
-                                
                                 <!-- Modal Footer -->
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+										<?php echo __( 'Close', 'pf' ); ?>
                                     </button>
                                 </div>
 
@@ -154,7 +165,7 @@ if ( isset( $_GET['category'] ) ) {
                                     <hr>
 									<?php
 									foreach ( $terms as $term ) {
-										echo '<span style="font-weight:bold">Category : ' . $term->name . '</span></br>';
+										echo '<span style="font-weight:bold"> ' . __( 'Category :' ) . $term->name . '</span></br> ' . __( 'URL -', 'pf' ) . $pf_ex_url;
 									}
 									?>
                                     <p class="card-text" style="margin-top:20px">
@@ -162,7 +173,7 @@ if ( isset( $_GET['category'] ) ) {
                                     </p>
                                     <a href="" class="btn btn-primary" data-toggle="modal"
                                        data-target="#myModal-<?php echo get_the_ID(); ?>">
-										<?php esc_html_e( 'View Details' ); ?>
+										<?php echo __( 'View Details', 'pf' ); ?>
                                     </a>
                                 </div>
                             </div>
@@ -182,7 +193,7 @@ if ( isset( $_GET['category'] ) ) {
 										<?php
 										if ( $terms && ! is_wp_error( $terms ) ) {
 											foreach ( $terms as $term ) {
-												echo '<span style="font-weight:bold">Category : ' . $term->name . '</span></br>URL - ' . $pf_ex_url;
+												echo '<span style="font-weight:bold"> ' . __( 'Category :' ) . $term->name . '</span></br> ' . __( 'URL -', 'pf' ) . $pf_ex_url;
 											}
 										}
 										?>
@@ -194,7 +205,8 @@ if ( isset( $_GET['category'] ) ) {
 
                                     <!-- Modal Footer -->
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+											<?php echo __( 'Close', 'pf' ); ?>
                                         </button>
                                     </div>
 
