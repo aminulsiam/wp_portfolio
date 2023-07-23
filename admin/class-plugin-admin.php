@@ -18,8 +18,33 @@ class WP_Portofolio_Admin {
 		add_action( 'save_post', [ $this, 'pf_save_metadata' ] );
 
 		add_action( 'init', array( $this, 'pf_register_shortcodes' ) );
+		add_action( 'init', array( $this, 'pf_register_taxonomy' ) );
 
 	}
+
+	/**
+	 * Register Taxonomy
+	 */
+	public function pf_register_taxonomy() {
+
+		$labels = array(
+			'name'          => _x( 'Category', 'pf' ),
+			'singular_name' => _x( 'Subject', 'pf' ),
+			'search_items'  => __( 'Search Projects' ),
+			'all_items'     => __( 'All Projects' ),
+			'menu_name'     => __( 'Category' ),
+		);
+
+		register_taxonomy( 'project_category', array( 'projects' ), array(
+			'hierarchical'      => true,
+			'labels'            => $labels,
+			'show_ui'           => true,
+			'show_in_rest'      => true,
+			'show_admin_column' => true,
+			'query_var'         => true,
+		) );
+
+	} //end pf_register_taxonomy
 
 
 	/**
@@ -27,7 +52,7 @@ class WP_Portofolio_Admin {
 	 */
 	public function pf_register_shortcodes() {
 		add_shortcode( 'show_projects', array( $this, 'pf_render_shortcode_show_projects' ) );
-	}
+	} //end pf_register_shortcodes
 
 	/**
 	 * Render all shortcode
