@@ -1,5 +1,3 @@
-<div class="col-lg-4 col-md-12 mb-4"></div>
-<div class="col-lg-4 col-md-12 mb-4"></div>
 <div class="col-lg-4 col-md-12 mb-4">
     <ul class="list-group">
 		<?php
@@ -48,7 +46,7 @@ if ( isset( $_GET['category'] ) ) {
 					$terms = get_the_terms( get_the_ID(), 'project_category' );
 
 					?>
-                    <div class="col-lg-4 col-md-12 mb-4">
+                    <div class="col-lg-6 col-md-12 mb-6" style="margin-bottom:20px">
                         <div class="card">
                             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
 								<?php the_post_thumbnail(); ?>
@@ -88,7 +86,7 @@ if ( isset( $_GET['category'] ) ) {
 									<?php
 									if ( $terms && ! is_wp_error( $terms ) ) {
 										foreach ( $terms as $term ) {
-											echo '<span style="font-weight:bold">Category : ' . $term->name . '</span></br>URL - ' . $pf_ex_url;
+											echo '<span style="font-weight:bold"> .' . __( 'Category : ', 'pf' ) . $term->name . '</span></br>' . $pf_ex_url;
 										}
 									}
 									?>
@@ -115,7 +113,6 @@ if ( isset( $_GET['category'] ) ) {
 										<?php echo __( 'Close', 'pf' ); ?>
                                     </button>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -145,15 +142,15 @@ if ( isset( $_GET['category'] ) ) {
 					while ( $projects->have_posts() ) {
 						$projects->the_post();
 
-						// Get post meta values
-						$pf_ex_url      = get_post_meta( get_the_ID(), 'pf_ex_url', true );
-						$pf_title       = get_post_meta( get_the_ID(), 'pf_title', true );
-						$pf_description = get_post_meta( get_the_ID(), 'pf_description', true );
+						$pf_ex_url          = get_post_meta( get_the_ID(), 'pf_ex_url', true );
+						$pf_title           = get_post_meta( get_the_ID(), 'pf_title', true );
+						$pf_description     = get_post_meta( get_the_ID(), 'pf_description', true );
+						$pf_multiple_images = get_post_meta( get_the_ID(), 'pf_multiple_images', true );
 
 						$terms = get_the_terms( get_the_ID(), 'project_category' );
 
 						?>
-                        <div class="col-lg-4 col-md-12 mb-4">
+                        <div class="col-lg-6 col-md-12 mb-6" style="margin-bottom:35px">
                             <div class="card">
                                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
 									<?php the_post_thumbnail(); ?>
@@ -165,7 +162,7 @@ if ( isset( $_GET['category'] ) ) {
                                     <hr>
 									<?php
 									foreach ( $terms as $term ) {
-										echo '<span style="font-weight:bold"> ' . __( 'Category :' ) . $term->name . '</span></br> ' . __( 'URL -', 'pf' ) . $pf_ex_url;
+										echo '<span style="font-weight:bold"> ' . __( 'Category : ' ) . $term->name . '</span></br> ' . $pf_ex_url;
 									}
 									?>
                                     <p class="card-text" style="margin-top:20px">
@@ -200,7 +197,17 @@ if ( isset( $_GET['category'] ) ) {
                                         <p style="margin-top:20px">
 											<?php echo $pf_description; ?>
                                         </p>
-										<?php the_post_thumbnail( array( 200, 100 ) ); ?>
+										<?php
+										if ( $pf_multiple_images ) {
+											echo '<hr> <h4 style="text-align:center"> ' . __( 'The Preview Images', 'pf' ) . ' </h4>';
+											$image_ids = explode( ',', $pf_multiple_images );
+											foreach ( $image_ids as $image_id ) {
+												echo wp_get_attachment_image( $image_id, 'thumbnail' );
+											}
+										}
+										echo '<hr> <h4 style="text-align:center">' . __( 'The Post Thumbnail', 'pf' ) . '</h4>';
+										the_post_thumbnail( array( 600, 400 ) );
+										?>
                                     </div>
 
                                     <!-- Modal Footer -->
@@ -209,7 +216,6 @@ if ( isset( $_GET['category'] ) ) {
 											<?php echo __( 'Close', 'pf' ); ?>
                                         </button>
                                     </div>
-
                                 </div>
                             </div>
                         </div>

@@ -10,17 +10,19 @@ class WP_Portofolio_Admin {
 	 * Write all admin hooks
 	 */
 	public function __construct() {
-		add_action( 'admin_enqueue_scripts', [ $this, 'pf_enqueue_styles' ], 10 );
-		add_action( 'admin_enqueue_scripts', [ $this, 'pf_enqueue_scripts' ], 10 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'pf_enqueue_styles' ), 10 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'pf_enqueue_scripts' ), 10 );
 
-		add_action( 'init', [ $this, 'pf_register_projects_cpt' ] );
-		add_action( 'add_meta_boxes', [ $this, 'pf_add_meta_box' ] );
-		add_action( 'save_post', [ $this, 'pf_save_metadata' ] );
+		add_action( 'init', array( $this, 'pf_register_projects_cpt' ) );
+		add_action( 'add_meta_boxes', array( $this, 'pf_add_meta_box' ) );
+		add_action( 'save_post', array( $this, 'pf_save_metadata' ) );
 
-		add_action( 'init', [ $this, 'pf_register_shortcodes' ] );
-		add_action( 'init', [ $this, 'pf_register_taxonomy' ] );
+		add_action( 'init', array( $this, 'pf_register_shortcodes' ) );
+		add_action( 'init', array( $this, 'pf_register_taxonomy' ) );
 
+	
 	}
+
 
 	/**
 	 * Register Taxonomy
@@ -97,7 +99,7 @@ class WP_Portofolio_Admin {
 	} //end method pf_register_projects_cpt
 
 	/**
-	 * Add Meta data under projects cpt
+	 * Add Meta box under projects cpt
 	 */
 	public function pf_add_meta_box() {
 		add_meta_box(
@@ -161,6 +163,8 @@ class WP_Portofolio_Admin {
 
 
 	/**
+	 * Render Projects Metadata
+	 *
 	 * @param $post_id
 	 *
 	 * @return mixed
