@@ -40,9 +40,9 @@ if ( isset( $_GET['category'] ) ) {
 					$pf_title           = get_post_meta( get_the_ID(), 'pf_title', true );
 					$pf_description     = get_post_meta( get_the_ID(), 'pf_description', true );
 					$pf_multiple_images = get_post_meta( get_the_ID(), 'pf_multiple_images', true );
-					$terms = get_the_terms( get_the_ID(), 'project_category' );
+					$terms              = get_the_terms( get_the_ID(), 'project_category' );
 					?>
-                    <div class="col-lg-6 col-md-12 mb-6" style="margin-bottom:20px">
+                    <div class="col-lg-6 col-md-12 mb-6 post_container" style="margin-bottom:20px">
                         <div class="card">
                             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
 								<?php the_post_thumbnail(); ?>
@@ -54,10 +54,10 @@ if ( isset( $_GET['category'] ) ) {
                                 <hr>
 								<?php
 								foreach ( $terms as $term ) {
-									echo '<span style="font-weight:bold"> ' . __( 'Category :', 'pf' ) . $term->name . '</span></br>';
+									echo '<span class="category_title"> ' . __( 'Category :', 'pf' ) . $term->name . '</span></br>';
 								}
 								?>
-                                <p class="card-text" style="margin-top:20px">
+                                <p class="card-text portfolio_description">
 									<?php echo substr( $pf_description, 0, 135 ) . "..."; ?>
                                 </p>
                                 <a href="" class="btn btn-primary" data-toggle="modal"
@@ -82,11 +82,11 @@ if ( isset( $_GET['category'] ) ) {
 									<?php
 									if ( $terms && ! is_wp_error( $terms ) ) {
 										foreach ( $terms as $term ) {
-											echo '<span style="font-weight:bold"> .' . __( 'Category : ', 'pf' ) . $term->name . '</span></br>' . $pf_ex_url;
+											echo '<span class="category_title"> .' . __( 'Category : ', 'pf' ) . $term->name . '</span></br>' . $pf_ex_url;
 										}
 									}
 									?>
-                                    <p style="margin-top:20px">
+                                    <p class="portfolio_description">
 										<?php echo $pf_description; ?>
                                     </p>
 
@@ -140,7 +140,7 @@ if ( isset( $_GET['category'] ) ) {
 						$pf_title           = get_post_meta( get_the_ID(), 'pf_title', true );
 						$pf_description     = get_post_meta( get_the_ID(), 'pf_description', true );
 						$pf_multiple_images = get_post_meta( get_the_ID(), 'pf_multiple_images', true );
-						$terms = get_the_terms( get_the_ID(), 'project_category' );
+						$terms              = get_the_terms( get_the_ID(), 'project_category' );
 
 						?>
                         <div class="col-lg-6 col-md-12 mb-6" style="margin-bottom:35px">
@@ -160,10 +160,10 @@ if ( isset( $_GET['category'] ) ) {
 									}
 
 									foreach ( $terms as $term ) {
-										echo '<span style="font-weight:bold"> ' . __( 'Category : ' ) . $term->name . '</span></br> ' . $pf_ex_url;
+										echo '<span class="category_title"> ' . __( 'Category : ' ) . $term->name . '</span></br> ' . $pf_ex_url;
 									}
 									?>
-                                    <p class="card-text" style="margin-top:20px">
+                                    <p class="card-text portfolio_description">
 										<?php echo substr( $pf_description, 0, 135 ) . "..."; ?>
                                     </p>
                                     <a href="" class="btn btn-primary" data-toggle="modal"
@@ -192,7 +192,7 @@ if ( isset( $_GET['category'] ) ) {
 											}
 										}
 										?>
-                                        <p style="margin-top:20px">
+                                        <p style="margin-top: 20px">
 											<?php echo $pf_description; ?>
                                         </p>
 										<?php
@@ -228,7 +228,3 @@ if ( isset( $_GET['category'] ) ) {
 	<?php
 }
 ?>
-
-
-
-
