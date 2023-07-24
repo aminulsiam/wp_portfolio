@@ -1,10 +1,10 @@
 <?php
 
-class WP_Portofolio_Public {
+class WP_Portfolio_Public {
 
 	/**
-	 * Wp_Pool_Admin constructor.
-	 * Write all admin hooks
+	 * WP_Portfolio_Public constructor.
+	 * Write all public hooks
 	 */
 	public function __construct() {
 		add_action( 'wp_enqueue_scripts', [ $this, 'pf_enqueue_styles' ] );
@@ -29,5 +29,5 @@ class WP_Portofolio_Public {
 
 } //end main class
 
-new WP_Portofolio_Public();
+new WP_Portfolio_Public();
 

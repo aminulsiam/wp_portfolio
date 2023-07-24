@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class WP_Portofolio_Admin
+ * Class WP_Portfolio_Admin
  */
-class WP_Portofolio_Admin {
+class WP_Portfolio_Admin {
 
 	/**
 	 * Wp_Pool_Admin constructor.
@@ -20,7 +20,7 @@ class WP_Portofolio_Admin {
 		add_action( 'init', array( $this, 'pf_register_shortcodes' ) );
 		add_action( 'init', array( $this, 'pf_register_taxonomy' ) );
 
-	
+
 	}
 
 
@@ -203,18 +203,27 @@ class WP_Portofolio_Admin {
 	 * Register all styles
 	 */
 	public function pf_enqueue_styles( $hook ) {
-		wp_enqueue_style( 'pf-admin-css', plugins_url( '/assets/css/pf-admin.css', __FILE__ ), array(), time(), 'all' );
+		$post_types = get_current_screen()->post_type;
+
+		if ( 'projects' == $post_types ) {
+			wp_enqueue_style( 'pf-admin-css', plugins_url( '/assets/css/pf-admin.css', __FILE__ ), array(), time(), 'all' );
+		}
+
 	}
 
 	/**
 	 * Register all scripts
 	 */
 	public function pf_enqueue_scripts( $hook ) {
-		wp_enqueue_script( 'pf-admin', plugins_url( '/assets/js/pf-admin.js', __FILE__ ), 'jquery', time(), true );
+		$post_types = get_current_screen()->post_type;
+
+		if ( 'projects' == $post_types ) {
+			wp_enqueue_script( 'pf-admin', plugins_url( '/assets/js/pf-admin.js', __FILE__ ), 'jquery', time(), true );
+		}
 	}
 
 
 } //end main class
 
-new WP_Portofolio_Admin();
+new WP_Portfolio_Admin();
 

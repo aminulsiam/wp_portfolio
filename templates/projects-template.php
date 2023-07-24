@@ -17,7 +17,6 @@
 if ( isset( $_GET['category'] ) ) {
 
 	$category = $_GET['category'];
-
 	$args     = array(
 		'post_type' => 'projects',
 		'tax_query' => array(
@@ -29,7 +28,6 @@ if ( isset( $_GET['category'] ) ) {
 		),
 	);
 	$projects = new WP_Query( $args );
-
 	?>
     <div class="container">
         <div class="row">
@@ -42,9 +40,7 @@ if ( isset( $_GET['category'] ) ) {
 					$pf_title           = get_post_meta( get_the_ID(), 'pf_title', true );
 					$pf_description     = get_post_meta( get_the_ID(), 'pf_description', true );
 					$pf_multiple_images = get_post_meta( get_the_ID(), 'pf_multiple_images', true );
-
 					$terms = get_the_terms( get_the_ID(), 'project_category' );
-
 					?>
                     <div class="col-lg-6 col-md-12 mb-6" style="margin-bottom:20px">
                         <div class="card">
@@ -106,8 +102,6 @@ if ( isset( $_GET['category'] ) ) {
 									the_post_thumbnail();
 									?>
                                 </div>
-
-                                <!-- Modal Footer -->
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
 										<?php echo __( 'Close', 'pf' ); ?>
@@ -146,7 +140,6 @@ if ( isset( $_GET['category'] ) ) {
 						$pf_title           = get_post_meta( get_the_ID(), 'pf_title', true );
 						$pf_description     = get_post_meta( get_the_ID(), 'pf_description', true );
 						$pf_multiple_images = get_post_meta( get_the_ID(), 'pf_multiple_images', true );
-
 						$terms = get_the_terms( get_the_ID(), 'project_category' );
 
 						?>
@@ -161,6 +154,11 @@ if ( isset( $_GET['category'] ) ) {
                                     </h4>
                                     <hr>
 									<?php
+
+									if ( ! is_array( $terms ) ) {
+										$terms = array();
+									}
+
 									foreach ( $terms as $term ) {
 										echo '<span style="font-weight:bold"> ' . __( 'Category : ' ) . $term->name . '</span></br> ' . $pf_ex_url;
 									}
