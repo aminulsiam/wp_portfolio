@@ -2,7 +2,7 @@
 /**
  * @wordpress-plugin
  * Plugin Name:       WP Portfolio
- * Plugin URI:        https://github.com/aminulsiam/cbxwpwritelog
+ * Plugin URI:        https://github.com/aminulsiam/wp_projects
  * Description:       Create custom post, Show custom post, Show single post.
  * Version:           1.0.0
  * Author:            Aminul Haq Mallik
