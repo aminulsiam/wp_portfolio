@@ -15,7 +15,6 @@
 
 <?php
 if ( isset( $_GET['category'] ) ) {
-
 	$category = $_GET['category'];
 	$args     = array(
 		'post_type' => 'projects',
@@ -54,16 +53,16 @@ if ( isset( $_GET['category'] ) ) {
                                 <hr>
 								<?php
 								foreach ( $terms as $term ) {
-									echo '<span class="category_title"> ' . __( 'Category :', 'pf' ) . $term->name . '</span></br>';
+									echo '<span class="category_title">' . __( 'Category :', 'pf' ) . $term->name . '</span></br>';
 								}
 								?>
                                 <p class="card-text portfolio_description">
 									<?php echo substr( $pf_description, 0, 135 ) . "..."; ?>
                                 </p>
-                                <a href="" class="btn btn-primary" data-toggle="modal"
-                                   data-target="#myModal-<?php echo get_the_ID(); ?>">
-									<?php esc_html_e( 'View Details' ); ?>
-                                </a>
+                                <button class="btn btn-primary" data-toggle="modal"
+                                        data-target="#myModal-<?php echo get_the_ID(); ?>">
+                                    View Details
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -71,13 +70,11 @@ if ( isset( $_GET['category'] ) ) {
                     <div class="modal" id="myModal-<?php echo get_the_ID(); ?>">
                         <div class="modal-dialog">
                             <div class="modal-content">
-
                                 <div class="modal-header">
                                     <h3 id="myModalLabel">
 										<?php the_title(); ?>
                                     </h3>
                                 </div>
-
                                 <div class="modal-body">
 									<?php
 									if ( $terms && ! is_wp_error( $terms ) ) {
@@ -166,13 +163,16 @@ if ( isset( $_GET['category'] ) ) {
                                     <p class="card-text portfolio_description">
 										<?php echo substr( $pf_description, 0, 135 ) . "..."; ?>
                                     </p>
-                                    <a href="" class="btn btn-primary" data-toggle="modal"
-                                       data-target="#myModal-<?php echo get_the_ID(); ?>">
+
+                                    <button class="btn btn-primary" data-toggle="modal"
+                                            data-target="#myModal-<?php echo get_the_ID(); ?>">
 										<?php echo __( 'View Details', 'pf' ); ?>
-                                    </a>
+                                    </button>
+
                                 </div>
                             </div>
                         </div>
+
 
                         <div class="modal" id="myModal-<?php echo get_the_ID(); ?>">
                             <div class="modal-dialog">
@@ -217,6 +217,7 @@ if ( isset( $_GET['category'] ) ) {
                                 </div>
                             </div>
                         </div>
+
 						<?php
 					}
 				}

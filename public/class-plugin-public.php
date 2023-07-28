@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class WP_Portfolio_Public
+ */
 class WP_Portfolio_Public {
 
 	/**
@@ -24,7 +27,7 @@ class WP_Portfolio_Public {
 	 * Register all scripts
 	 */
 	public function pf_enqueue_scripts() {
-		wp_enqueue_script( 'pf-public', plugins_url( '/assets/js/bootstrap.min.js', __FILE__ ), 'jquery', time(), true );
+		wp_enqueue_script( 'pf-public', plugins_url( '/assets/js/bootstrap.min.js', __FILE__ ), array( 'jquery' ), time(), true );
 	}
 
 

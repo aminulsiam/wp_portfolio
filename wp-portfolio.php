@@ -13,8 +13,18 @@
  * Domain Path:       /languages
  */
 
-require_once 'admin/class-plugin-admin.php';
-require_once 'public/class-plugin-public.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/class-plugin-admin.php';
+require_once plugin_dir_path( __FILE__ ) . 'public/class-plugin-public.php';
+
+
+class WP_Portfolio {
+	public function __construct() {
+		$admin  = new WP_Portfolio_Admin();
+		$public = new WP_Portfolio_Public();
+	}
+}
+
+new WP_Portfolio();
 
 
 
