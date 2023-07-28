@@ -13,19 +13,9 @@
  * Domain Path:       /languages
  */
 
-require_once plugin_dir_path( __FILE__ ) . 'admin/class-plugin-admin.php';
-require_once plugin_dir_path( __FILE__ ) . 'public/class-plugin-public.php';
-
-
-class WP_Portfolio {
-	public function __construct() {
-		$admin  = new WP_Portfolio_Admin();
-		$public = new WP_Portfolio_Public();
-	}
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-new WP_Portfolio();
-
-
-
-
+require_once plugin_dir_path( __FILE__ ) . 'admin/class-plugin-admin.php';
+require_once plugin_dir_path( __FILE__ ) . 'public/class-plugin-public.php';
