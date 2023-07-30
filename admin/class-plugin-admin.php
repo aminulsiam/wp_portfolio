@@ -206,7 +206,7 @@ class WP_Portfolio_Admin {
 		$post_types = get_current_screen()->post_type;
 
 		if ( 'projects' == $post_types ) {
-			wp_enqueue_style( 'pf-admin-css', plugins_url( '/assets/css/pf-admin.css', __FILE__ ), array(), time(), 'all' );
+			wp_enqueue_style( 'pf-admin-css', plugins_url( '../assets/css/pf-admin.css', __FILE__ ), array(), time(), 'all' );
 		}
 
 	}
@@ -218,7 +218,7 @@ class WP_Portfolio_Admin {
 		$post_types = get_current_screen()->post_type;
 
 		if ( 'projects' == $post_types ) {
-			wp_enqueue_script( 'pf-admin', plugins_url( '/assets/js/pf-admin.js', __FILE__ ), 'jquery', time(), true );
+			wp_enqueue_script( 'pf-admin', plugins_url( '../assets/js/pf-admin.js', __FILE__ ), 'jquery', time(), true );
 		}
 	}
 
